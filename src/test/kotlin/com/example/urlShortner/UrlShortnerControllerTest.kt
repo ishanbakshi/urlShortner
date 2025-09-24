@@ -27,7 +27,7 @@ class UrlShortnerControllerTest(@Autowired val mockMvc: MockMvc) {
     @DisplayName("GET /v1/{id} should redirect permanently to the stored fullUrl")
     fun getUrl_redirectsToStoredUrl() {
         Mockito.`when`(urlInfoService.findUrlInfoById("abc555")).thenReturn(
-            UrlInfo(id = "abc555", fullUrl = "https://example.com/page")
+            UrlInfo(id = 42111, fullUrl = "https://example.com/page")
         )
 
         mockMvc.perform(get("/v1/abc555"))

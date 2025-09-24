@@ -62,7 +62,14 @@ class UrlShortnerE2ETest {
     @Test
     @DisplayName("E2E: GET unknown id returns 404")
     fun resolveUnknown_returns404() {
-        mockMvc.perform(get("/v1/does-not-exist"))
+        mockMvc.perform(get("/v1/GM2DEMZUGIZTI==="))
+            .andExpect(status().isNotFound)
+    }
+
+    @Test
+    @DisplayName("E2E: GET unknown id which cannot be decode to int")
+    fun resolveInvalidDecodedBase32_returns404() {
+        mockMvc.perform(get("/v1/invalid-base32-string"))
             .andExpect(status().isNotFound)
     }
 }

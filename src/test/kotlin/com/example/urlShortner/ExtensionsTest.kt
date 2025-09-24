@@ -13,12 +13,10 @@ class ExtensionsTest {
     }
 
     @Test
-    fun `decodes Base32 to string`() {
+    fun `decodes Base32 to int`() {
         val input = "GM2DEMZUGIZTI==="
-        val expected = "34234234"
+        val expected = 34234234
         assertEquals(expected, input.decodeFromBase32())
     }
-
-
 
 }

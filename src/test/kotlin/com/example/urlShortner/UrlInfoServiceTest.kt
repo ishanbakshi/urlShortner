@@ -36,7 +36,7 @@ class UrlInfoServiceTest {
     fun `findUrlInfoById should return null when not found`() {
         val service = UrlInfoService(jdbcTemplate)
 
-        val missing = service.findUrlInfoById("does-not-exist")
+        val missing = service.findUrlInfoById("GM2DEMZUGIZTI===")
         assertThat(missing).isNull() //TODO: Throw 404 in this scenario when controller is integrated with this service.
     }
 
