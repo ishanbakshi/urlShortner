@@ -3,8 +3,10 @@ package com.example.urlShortner
 import org.hamcrest.Matchers.equalTo
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.test.context.bean.override.mockito.MockitoBean
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
@@ -18,6 +20,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 @WebMvcTest(controllers = [UrlShortnerController::class])
 class UrlShortnerControllerTest(@Autowired val mockMvc: MockMvc) {
 
+    @MockitoBean
+    lateinit var urlInfoService: UrlInfoService
+
     @Test
     @DisplayName("GET /v1/ should redirect permanently to https://google.com")
     fun getUrl_redirectsToGoogle() {
@@ -27,9 +32,14 @@ class UrlShortnerControllerTest(@Autowired val mockMvc: MockMvc) {
     }
 
     @Test
-    @DisplayName("POST /v1/ should return the dummy short URL")
-    fun createShortUrl_returnsDummy() {
+    @DisplayName("POST /v1/ should return the concatenated short URL with host")
+    fun createShortUrl_returnsConcatenatedUrl() {
         val body = """{"url":"https://example.com"}"""
+
+        // Mock the service to return a deterministic id
+        Mockito.`when`(urlInfoService.createUrlInfo("https://example.com")).thenReturn(
+            UrlInfo(id = "abc123", fullUrl = "https://example.com")
+        )
 
         mockMvc.perform(
             post("/v1/")
@@ -38,7 +48,7 @@ class UrlShortnerControllerTest(@Autowired val mockMvc: MockMvc) {
         )
             .andExpect(status().isOk)
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.shortUrl", equalTo("dummyURL1")))
+            .andExpect(jsonPath("$.shortUrl", equalTo("http://localhost/v1/abc123")))
     }
 
     @Test

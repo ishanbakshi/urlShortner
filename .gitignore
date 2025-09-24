@@ -38,3 +38,6 @@ out/
 
 ### Kotlin ###
 .kotlin
+
+### When using h2 file db, do not commit the DB in the source code
+data/
