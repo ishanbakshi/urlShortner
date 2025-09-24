@@ -1,0 +1,26 @@
+### URL Shortener API — HTTP Client examples
+
+# Start the app first:
+# ./gradlew bootRun
+# The server runs on http://localhost:8080 by default.
+
+### GET : redirect short url to actual url
+GET http://localhost:8080/v1/
+Accept: application/json
+
+### POST : create short URL for the given URL in the request body
+POST http://localhost:8080/v1/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "url": ""
+}
+
+### cURL equivalents (copy/paste into a shell)
+# GET
+# curl -s http://localhost:8080/v1/
+# POST
+# curl -s -X POST http://localhost:8080/v1/ \
+#   -H 'Content-Type: application/json' \
+#   -d '{"url":"https://example.com/some/long/path"}'
