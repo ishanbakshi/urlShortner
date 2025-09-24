@@ -39,5 +39,6 @@ OR
 - Sensitive properties in application.properties to be managed like secrets. For example, DB password
 - Application properties to be managed in a better way to support multiple environments. For example, DB path and username
 - Add UNIQUE constraint on fullUrl in schema.sql and make code changes to avoid creating multiple tinyUrls for same URL.
+- Clean up unwanted files
 
 
