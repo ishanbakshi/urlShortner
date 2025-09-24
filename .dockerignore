@@ -1,0 +1,20 @@
+# Ignore Git and IDE metadata
+.git
+.gitignore
+.idea
+*.iml
+
+# Gradle build caches and outputs
+.gradle
+build
+out
+
+# OS files
+.DS_Store
+
+# Test databases and local data (will be mounted as a volume at runtime)
+data/
+
+# Logs
+logs
+*.log

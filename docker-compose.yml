@@ -1,0 +1,12 @@
+services:
+  app:
+    build: .
+    container_name: urlshortner
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/app/data
+    environment:
+      # You can override JVM options at runtime, e.g. "-Xms256m -Xmx512m"
+      - JAVA_OPTS=
+    restart: unless-stopped

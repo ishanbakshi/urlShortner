@@ -1,11 +1,14 @@
 ### URL Shortener API — HTTP Client examples
 
 # Start the app first:
-# ./gradlew bootRun
+# Option A (Docker/Compose, single command):
+#   docker compose up -d --build
+# Option B (local Gradle):
+#   ./gradlew bootRun
 # The server runs on http://localhost:8080 by default.
 
 ### GET : redirect short url to actual url
-GET http://localhost:8080/v1/
+GET http://localhost:8080/v1/GE2TKOBZGA2TAMBT
 Accept: application/json
 
 ### POST : create short URL for the given URL in the request body
@@ -14,7 +17,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "url": ""
+  "url": "https://www.originenergy.com.au/"
 }
 
 ### cURL equivalents (copy/paste into a shell)
