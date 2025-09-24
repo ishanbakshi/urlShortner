@@ -24,11 +24,24 @@ class UrlShortnerControllerTest(@Autowired val mockMvc: MockMvc) {
     lateinit var urlInfoService: UrlInfoService
 
     @Test
-    @DisplayName("GET /v1/ should redirect permanently to https://google.com")
-    fun getUrl_redirectsToGoogle() {
-        mockMvc.perform(get("/v1/"))
+    @DisplayName("GET /v1/{id} should redirect permanently to the stored fullUrl")
+    fun getUrl_redirectsToStoredUrl() {
+        Mockito.`when`(urlInfoService.findUrlInfoById("abc555")).thenReturn(
+            UrlInfo(id = "abc555", fullUrl = "https://example.com/page")
+        )
+
+        mockMvc.perform(get("/v1/abc555"))
             .andExpect(status().isMovedPermanently)
-            .andExpect(header().string(HttpHeaders.LOCATION, "https://google.com"))
+            .andExpect(header().string(HttpHeaders.LOCATION, "https://example.com/page"))
+    }
+
+    @Test
+    @DisplayName("GET /v1/{id} should return 404 when id not found")
+    fun getUrl_returnsNotFoundWhenMissing() {
+        Mockito.`when`(urlInfoService.findUrlInfoById("missing")).thenReturn(null)
+
+        mockMvc.perform(get("/v1/missing"))
+            .andExpect(status().isNotFound)
     }
 
     @Test
