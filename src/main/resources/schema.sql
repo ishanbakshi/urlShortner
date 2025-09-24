@@ -1,5 +1,5 @@
 -- schema.sql
 CREATE TABLE IF NOT EXISTS url_info (
 id VARCHAR(60) PRIMARY KEY,
-fullUrl VARCHAR NOT NULL UNIQUE
+fullUrl VARCHAR NOT NULL
 );

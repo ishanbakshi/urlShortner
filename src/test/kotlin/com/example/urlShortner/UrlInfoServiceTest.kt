@@ -46,10 +46,13 @@ class UrlInfoServiceTest {
         val fullUrl = "https://example.com/duplicate"
 
         // First insert succeeds
-        service.createUrlInfo(fullUrl)
+        val firstRes = service.createUrlInfo(fullUrl)
+        assertThat(firstRes).isNotBlank()
 
-        // Second insert with same fullUrl should violate UNIQUE constraint
-        assertThatThrownBy { service.createUrlInfo("https://example.com/duplicate") }
-            .isInstanceOf(DataIntegrityViolationException::class.java)
+        // Second insert with same fullUrl should also work
+        val secondRes = service.createUrlInfo(fullUrl)
+        assertThat(secondRes).isNotBlank()
+
+
     }
 }
