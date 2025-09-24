@@ -1,3 +1,3 @@
 package com.example.urlShortner
 
-data class UrlInfo(val shortUrl: String, val fullUrl: String)
+data class UrlInfo( val id: String, val fullUrl: String)
