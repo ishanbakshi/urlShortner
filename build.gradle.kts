@@ -28,6 +28,7 @@ dependencies {
 	runtimeOnly("com.h2database:h2")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     //implementation("org.springframework.boot:spring-boot-starter-data-jdbc") Might want to move to this later on
+    implementation("commons-codec:commons-codec:1.16.1")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")

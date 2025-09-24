@@ -21,17 +21,15 @@ class UrlInfoServiceTest {
         val service = UrlInfoService(jdbcTemplate)
 
         val fullUrl = "https://example.com/my/very/long/url"
-        val created = service.createUrlInfo(fullUrl)
+        val createdUrlPostfix = service.createUrlInfo(fullUrl)
 
         // The ID should be a non-empty UUID string
-        assertThat(created.id).isNotBlank()
-        assertThat(created.fullUrl).isEqualTo(fullUrl)
+        assertThat(createdUrlPostfix).isNotBlank()
 
         // Verify it was actually stored and can be read back
-        val fetched = service.findUrlInfoById(created.id)
+        val fetched = service.findUrlInfoById(createdUrlPostfix)
         assertThat(fetched).isNotNull
-        assertThat(fetched!!.id).isEqualTo(created.id)
-        assertThat(fetched.fullUrl).isEqualTo(fullUrl)
+        assertThat(fetched!!.fullUrl).isEqualTo(fullUrl)
     }
 
     @Test

@@ -30,9 +30,9 @@ class UrlShortnerController ( private val urlInfoService: UrlInfoService ){
 
     @PostMapping()
     fun createShortUrl(@Valid @RequestBody body: UrlCreateRequest): Map<String, String> {
-        val created: UrlInfo = urlInfoService.createUrlInfo(body.url)
+        val shortUrlPostfix: String = urlInfoService.createUrlInfo(body.url)
         val baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString().trim('/') + "/v1/"
         // Return a concatenated short URL as specified (e.g., "https://localhost:8080/" + created.id)
-        return mapOf("shortUrl" to (baseUrl + created.id))
+        return mapOf("shortUrl" to (baseUrl + shortUrlPostfix))
     }
 }

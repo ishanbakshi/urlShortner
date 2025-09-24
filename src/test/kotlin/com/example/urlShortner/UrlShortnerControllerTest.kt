@@ -51,7 +51,7 @@ class UrlShortnerControllerTest(@Autowired val mockMvc: MockMvc) {
 
         // Mock the service to return a deterministic id
         Mockito.`when`(urlInfoService.createUrlInfo("https://example.com")).thenReturn(
-            UrlInfo(id = "abc123", fullUrl = "https://example.com")
+            "abc123"
         )
 
         mockMvc.perform(
